@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {
-    FavoriteBorderOutlined,
-    SearchOutlined,
-    ShoppingCartOutlined,
-  } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { BASE_URL } from "../requestMethods";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";

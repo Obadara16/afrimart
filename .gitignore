@@ -1,11 +1,1 @@
-client/node_modules
-server/node_modules
 node_modules
-build/
-coverage/
-server/.env
-client/.env
-
-
-# misc
-.DS_Store

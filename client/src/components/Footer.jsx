@@ -1,12 +1,4 @@
-import {
-  Facebook,
-  Instagram,
-  MailOutline,
-  Phone,
-  Pinterest,
-  Room,
-  Twitter,
-} from "@material-ui/icons";
+
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { mobile } from "../responsive";
@@ -19,7 +11,7 @@ const Footer = () => {
   <div className="absolute  left-0 h-full w-full overflow-hidden">
     <div className="absolute h-[50%] w-full top-72 left-0 bg-green-500 transform -rotate-45 -translate-x-2/3"></div>
   </div> */}
-  <div className="mx-auto py-6">
+  {/* <div className="mx-auto py-6">
   <div className=" w-full mx-auto  border-t-2 border-custom-btn-green border-opacity-60  ">
       <div className="w-11/12 mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-20">
         <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4 text-sm">
@@ -154,7 +146,7 @@ const Footer = () => {
       </div>
       
     </div>
-  </div>
+  </div> */}
 </div>
 
     

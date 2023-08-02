@@ -1,9 +1,7 @@
-import {
-  FavoriteBorderOutlined,
-} from "@material-ui/icons";
+
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faHeartCrack, faHeartMusicCameraBolt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Product = ({ item, featured }) => {
@@ -49,7 +47,7 @@ const Product = ({ item, featured }) => {
         <div className="bg-gray-300  w-full bg-opacity-20 relative overflow-hidden">
           <img
             src={item.img}
-            className="h-[150px] md:h-[250px] w-full relative"
+            className="h-[150px] md:h-[200px] w-full relative"
             alt={item.title}
             style={imageStyle}
             onMouseEnter={handleMouseEnter}
@@ -65,7 +63,7 @@ const Product = ({ item, featured }) => {
               {isFavorite ?
               <FontAwesomeIcon icon={faHeart} style={{color: "#FFFFFF",}} />
               :  
-              <FavoriteBorderOutlined />
+              <FontAwesomeIcon icon={faHeartCrack}  />
               }
             </div>
           </div>

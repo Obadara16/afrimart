@@ -1,4 +1,4 @@
-import { Add, FavoriteBorderOutlined, Remove } from "@material-ui/icons";
+
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
@@ -9,7 +9,7 @@ import { publicRequest } from "../requestMethods";
 import { addProduct, decreaseQuantity, increaseQuantity } from "../redux/cartRedux";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClover, faHeart, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faAdd, faClover, faHeart, faPlus, faRemove, faSubtract } from "@fortawesome/free-solid-svg-icons";
 import Products from "../components/Products";
 import CombinedNav from "../components/CombinedNav";
 
@@ -85,16 +85,16 @@ const ProductDetails = () => {
             <div className="flex flex-col gap-3">
               <span className="font-light mr-2">Quantity:</span>
               <div className="flex items-center border border-gray-400 w-fit">
-                <Remove className="cursor-pointer text-black border border-b-gray-400" onClick={() => handleDecrease(_id)} style={{bg: "#D9D9D9"}} />
+              <FontAwesomeIcon icon={faSubtract} className="cursor-pointer text-black border border-b-gray-400" onClick={() => handleDecrease(_id)} style={{bg: "#D9D9D9"}}/>
                 <span className="px-3">{quantity}</span>
-                <Add className="cursor-pointer  text-black border border-b-gray-400" onClick={() => handleIncrease(_id)} style={{bg: "#D9D9D9"}}/>
+                <FontAwesomeIcon icon={faAdd} className="cursor-pointer  text-black border border-b-gray-400" onClick={() => handleIncrease(_id)} style={{bg: "#D9D9D9"}}/>
               </div>
             </div>
             <div>
                 <div className="flex gap-4">
                 <button className="bg-custom-btn-green hover:bg-custom-brown h-[54px] hover:text-black text-white font-light px-8 py-4 rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 sm:text-[12px] md:text-[16px] whitespace-nowrap hover:scale-110" onClick={handleClick}>Add to Cart    .     {price}.00</button>
                 <div className="border border-custom-btn-green border-opacity-60 flex items-center justify-center w-[100px] h-[54px] gap-4 py-4 px-4 rounded-md flex-nowrap font-light">
-                  <FavoriteBorderOutlined />
+                <FontAwesomeIcon icon={faHeart} />
                   <span className="text-black font-light">192</span>
                 </div>
               </div>
