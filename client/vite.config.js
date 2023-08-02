@@ -7,12 +7,12 @@ dotenv.config(); // load environment variables from .env file
 
 export default defineConfig({
   server: {
-    // proxy: {
-    //   "/api/v1": "https://afrimart-backend.onrender.com/",
-    // },
     proxy: {
-      "/api/v1": "http://localhost:5000/",
+      "/api/v1": "https://afrimart-backend.onrender.com/",
     },
+    // proxy: {
+    //   "/api/v1": "http://localhost:5000/",
+    // },
   },
   plugins: [
     react(),
