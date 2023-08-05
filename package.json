@@ -5,8 +5,7 @@
   "author": "Roqeeb Obadara",
   "license": "MIT",
   "dependencies": {
-    "concurrently": "^8.2.0",
-    "react-responsive": "^9.0.2"
+    "concurrently": "^8.2.0"
   },
   "scripts": {
     "start": "concurrently \"cd ./server && npm run server\" \"cd ./client && npm run dev\"",
