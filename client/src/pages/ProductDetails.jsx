@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { publicRequest } from "../requestMethods";
 import { addProduct, decreaseQuantity, increaseQuantity } from "../redux/cartRedux";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd, faClover, faHeart, faPlus, faRemove, faSubtract } from "@fortawesome/free-solid-svg-icons";
 import Products from "../components/Products";
 import CombinedNav from "../components/CombinedNav";
+import { useMediaQuery } from "react-responsive";
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
 
 
 const ProductDetails = () => {
@@ -51,57 +56,96 @@ const ProductDetails = () => {
 
   const {_id, img, title, desc, price, productSlug } = product;
 
+
+  // Use the react-responsive hook to detect screen size
+  const sliderImages = [
+    {
+      id: 1,
+      img: img,
+    },
+    {
+      id: 2,
+      img: img,
+    },
+    {
+      id: 3,
+      img: img,
+    }
+  ]; // An array of image URLs for the slider
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 640px)" });
+
   
   return (
     <div className="w-full">
       <CombinedNav/>
       <section className="w-11/12 mx-auto flex flex-col my-12 gap-6  ">
         {/* Product Images and Add to cart section goes here */}
-        <section className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-16 ">
-          <div className="col-span-2 md:flex h-fit">
-            <div className="flex flex-col justify-center gap-4 h-fit md:w-1/3 sm:w-full">
-              <img className="w-full md:w-[100%] h-[124px]" src={img} alt={title}/>
-              <img className="w-full md:w-[100%] h-[124px]" src={img} alt={title}/>
-              <img className="w-full md:w-[100%] h-[124px] transform -rotate-180" src={img} alt={title}/>
-            </div>
-            <div className="flex sm:w-full md:w-2/3 justify-center sm:pt-4 md:pt-0 md:px-4 h-full">
-              <img className=" sm:w-full md:min-[380px] object-cover md:h-[480px] " src={img} alt={title} />
-            </div>
-          </div>
-          <div className="col-span-1 p-0 px-24 flex flex-col gap-6 justify-center">
-            <h1 className="font-bold">{title}</h1>
-            <p className="font-semibold italic">{desc}</p>
-            <span className="text-xl font-semibold text-custom-btn-green">$ {price}.<span className="text-xs align-baseline">00</span></span>
-            <div className="flex flex-col items-start gap-3">
-              <span className="font-light ">Color:</span>
-              {/* {map((c) => (
-                <div className={`w-5 h-5 rounded-full border border-gray-400 pl-4 cursor-pointer ${color === c && 'border-teal-500'}`} style={{ backgroundColor: c }} onClick={() => setColor(c)} key={c}></div>
-              ))} */}
-            </div>
-            <div className="flex flex-col gap-3">
-              <span className="font-light mr-2">Size:</span>
-              <p className="text-black font-normal text-normal rounded-md border-custom-btn-green border-solid border-2 w-fit p-2 ">{quantity? 8*quantity : "8"} yards</p>
-            </div>
-            <div className="flex flex-col gap-3">
-              <span className="font-light mr-2">Quantity:</span>
-              <div className="flex items-center border border-gray-400 w-fit">
-              <FontAwesomeIcon icon={faSubtract} className="cursor-pointer text-black border border-b-gray-400" onClick={() => handleDecrease(_id)} style={{bg: "#D9D9D9"}}/>
-                <span className="px-3">{quantity}</span>
-                <FontAwesomeIcon icon={faAdd} className="cursor-pointer  text-black border border-b-gray-400" onClick={() => handleIncrease(_id)} style={{bg: "#D9D9D9"}}/>
-              </div>
-            </div>
-            <div>
-                <div className="flex gap-4">
-                <button className="bg-custom-btn-green hover:bg-custom-brown h-[54px] hover:text-black text-white font-light px-8 py-4 rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 sm:text-[12px] md:text-[16px] whitespace-nowrap hover:scale-110" onClick={handleClick}>Add to Cart    .     {price}.00</button>
-                <div className="border border-custom-btn-green border-opacity-60 flex items-center justify-center w-[100px] h-[54px] gap-4 py-4 px-4 rounded-md flex-nowrap font-light">
-                <FontAwesomeIcon icon={faHeart} />
-                  <span className="text-black font-light">192</span>
-                </div>
-              </div>
+        {/* Slider for images (Show only on small screens) */}
+      {isSmallScreen && (
+        <Swiper
+        spaceBetween={10}
+        slidesPerView={1}
+        onSlideChange={() => console.log('slide change')}
+        onSwiper={(swiper) => console.log(swiper)}
+      >
+      <div className="overflow-hidden text-center h-[300px]">
+        <SwiperSlide className="text-center">Slide 1</SwiperSlide>
+        <SwiperSlide>Slide 2</SwiperSlide>
+        <SwiperSlide>Slide 3</SwiperSlide>
+        <SwiperSlide>Slide 4</SwiperSlide>
+      </div>
+      </Swiper>
+        
+      )}
 
-              </div>
+      {/* Product Images and Add to cart section (Show on medium screens and above) */}
+      {!isSmallScreen && (
+        <section className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-16 ">
+        <div className="col-span-2 md:flex h-fit">
+          <div className="flex flex-col justify-center gap-4 h-fit md:w-1/3 sm:w-full">
+            <img className="w-full md:w-[100%] h-[124px]" src={img} alt={title}/>
+            <img className="w-full md:w-[100%] h-[124px]" src={img} alt={title}/>
+            <img className="w-full md:w-[100%] h-[124px] transform -rotate-180" src={img} alt={title}/>
           </div>
-        </section>
+          <div className="flex sm:w-full md:w-2/3 justify-center sm:pt-4 md:pt-0 md:px-4 h-full">
+            <img className=" sm:w-full md:min-[380px] object-cover md:h-[480px] " src={img} alt={title} />
+          </div>
+        </div>
+        <div className="col-span-1 p-0 px-24 flex flex-col gap-6 justify-center">
+          <h1 className="font-bold">{title}</h1>
+          <p className="font-semibold italic">{desc}</p>
+          <span className="text-xl font-semibold text-custom-btn-green">$ {price}.<span className="text-xs align-baseline">00</span></span>
+          <div className="flex flex-col items-start gap-3">
+            <span className="font-light ">Color:</span>
+            {/* {map((c) => (
+              <div className={`w-5 h-5 rounded-full border border-gray-400 pl-4 cursor-pointer ${color === c && 'border-teal-500'}`} style={{ backgroundColor: c }} onClick={() => setColor(c)} key={c}></div>
+            ))} */}
+          </div>
+          <div className="flex flex-col gap-3">
+            <span className="font-light mr-2">Size:</span>
+            <p className="text-black font-normal text-normal rounded-md border-custom-btn-green border-solid border-2 w-fit p-2 ">{quantity? 8*quantity : "8"} yards</p>
+          </div>
+          <div className="flex flex-col gap-3">
+            <span className="font-light mr-2">Quantity:</span>
+            <div className="flex items-center border border-gray-400 w-fit">
+            <FontAwesomeIcon icon={faSubtract} className="cursor-pointer text-black border border-b-gray-400" onClick={() => handleDecrease(_id)} style={{bg: "#D9D9D9"}}/>
+              <span className="px-3">{quantity}</span>
+              <FontAwesomeIcon icon={faAdd} className="cursor-pointer  text-black border border-b-gray-400" onClick={() => handleIncrease(_id)} style={{bg: "#D9D9D9"}}/>
+            </div>
+          </div>
+          <div>
+              <div className="flex gap-4">
+              <button className="bg-custom-btn-green hover:bg-custom-brown h-[54px] hover:text-black text-white font-light px-8 py-4 rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 sm:text-[12px] md:text-[16px] whitespace-nowrap hover:scale-110" onClick={handleClick}>Add to Cart    .     {price}.00</button>
+              <div className="border border-custom-btn-green border-opacity-60 flex items-center justify-center w-[100px] h-[54px] gap-4 py-4 px-4 rounded-md flex-nowrap font-light">
+              <FontAwesomeIcon icon={faHeart} />
+                <span className="text-black font-light">192</span>
+              </div>
+            </div>
+
+            </div>
+        </div>
+      </section>
+      )}
 
         {/* Product Description and Refund section goes here */}
         <section className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-16 my-12">
